@@ -1,16 +1,22 @@
 import { useState } from 'react'
 import './App.sass'
+import Weather from './weather'
 
 function App() {
 
   return (
     <>
       <div className='container'>
-        <div className='search'>
-          <input type="text" className='searchBar'/>
-        </div>
         <div className='weather'>
-          <p>this is the weather</p>
+          <div className='currentWeather'>
+            <Weather />
+          </div>
+          <div className='forecast'>
+            <div className='forecastTitle'>
+              <h2>FORECAST</h2>
+            </div>
+            <div className='forecastDayList'></div>
+          </div>
         </div>
       </div>
     </>
