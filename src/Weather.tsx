@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Weather.sass';
+import HumidityIcon from './assets/humidity-icon.svg';
+import WindIcon from './assets/wind-icon.svg';
 
 const Weather = () => {
   const [city, setCity] = useState('');
@@ -10,7 +12,7 @@ const Weather = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=ILEAKEDMYAPIKEYButDontWorryIGotANewOneAndDisabledTheOldOne:)`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=NOAPIFORYOU`
       );
       setWeatherData(response.data);
       calculateCurrentTime(response.data.timezone);
@@ -37,6 +39,11 @@ const Weather = () => {
     // Clear the interval when the component is unmounted
     return () => clearInterval(intervalId);
   };
+
+  const formatTime = (time) => {
+    const options = { hour: 'numeric', minute: '2-digit', hour12: true };
+    return new Intl.DateTimeFormat('en-US', options).format(time);
+  };
   
   useEffect(() => {
     fetchData();
@@ -62,25 +69,44 @@ const Weather = () => {
             onChange={handleInputChange}
             className='searchbox'
           />
-          <button type="submit" className='searchbutton'>Get Weather</button>
+          <button type="submit" className='searchbutton'></button>
         </form>
-        <button className='cfbtn'>°C</button>
-        <button className='cfbtn'>°F</button>
       </div>
 
       {weatherData ? (
         <div className='weather-response-container'>
-          <h2 className='weather-city-name response-item'>{weatherData.name}</h2>
-          <img
-            src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-            alt='Weather Icon'
-            className='weather-icon'
-          />
-          <p className='response-item'>Temperature: {Math.floor(weatherData.main.temp)} °C</p>
-          <p className='response-item'>Description: {weatherData.weather[0].description}</p>
-          {currentTime && <p className='response-item'>Current Time: {currentTime.toLocaleTimeString()}</p>}
-          <p className='response-item'>Humidity : {weatherData.main.humidity}%</p>
-          <p className='response-item'>Wind Speed : {weatherData.wind.speed}m/s</p>
+          <div className='location-n-time'>
+            <h2 className='weather-city-name response-item'>{(weatherData.name).toUpperCase()}</h2>
+            {currentTime && <p className='city-time response-item'>{formatTime(currentTime)}</p>}
+          </div>
+          <div className='temp-n-img'>
+            <p className='temp'>{Math.floor(weatherData.main.temp)}</p><p className='temp-cf'>°C</p>
+          </div>
+          
+          <p className='weather-desc'>{(weatherData.weather[0].description).toUpperCase()}</p>
+          
+          <div className='weather-stats-container'>
+            <div className='weather-stat left-stat-box'>
+              <img src={HumidityIcon} alt="Humidity Icon" className='stat-icon' />
+              <div className='stat-text-container'>
+                <p className='stat-text'>{weatherData.main.humidity}</p><p className='stat-text-addon'>%</p>
+              </div>
+            </div>
+            <div className='weather-stat'>
+              <img src={WindIcon} alt="Humidity Icon" className='stat-icon wind-icon' style={{transform: `rotate(${weatherData.wind.deg}deg)`}} />
+              <div className='stat-text-container'>
+                <p className='stat-text'>{weatherData.wind.speed}</p><p className='stat-text-addon'>m/s</p>
+              </div>
+            </div>
+            <div className='weather-stat right-stat-box'>
+              <img src={HumidityIcon} alt="Humidity Icon" className='stat-icon' />
+              <div className='stat-text-container'>
+                <p className='stat-text'>{weatherData.wind.speed}</p><p className='stat-text-addon'>m/s</p>
+              </div>
+            </div>
+          </div>
+
+          
         </div>
       ) : (
         <p>Loading weather data...</p>

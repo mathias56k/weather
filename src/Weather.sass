@@ -2,18 +2,18 @@
     font-family: Montserrat
 
 .weather-container
-    background-color: green
-    width: 90%
+    width: 100%
     display: flex
     flex-direction: column
     align-items: center
-    height: 100%
+    background-color: #1E1E24
 
 .topbar
-    height: 20%
-    width: 90%
+    height: 5em
+    width: 100%
     display: flex
     align-items: center
+    margin-top: 2em
 
 .weather-search-container
     height: 100%
@@ -23,29 +23,113 @@
     align-items: center
 
 .searchbox
-    height: 40%
-    width: 50%
+    height: 50%
+    width: 70%
+    border-radius: 15px
+    background: none
+    border: solid 4px #988570
 
 .searchbutton
-    height: 46.5%
-
-.cfbtn
-    height: 3em
-    width: 3em
+    height: 3.5em
+    width: 3.5em
+    margin-left: .4em
+    border-radius: 15px
+    background-color: #988570
+    border: solid 4px #988570
 
 .weather-response-container
-    background-color: blue
-    height: 80%
-    width: 90%
+    background-color: #24242A
+    border-radius: 20px
+    width: 85%
+    height: 100%
     display: flex
     flex-direction: column
     align-items: center
-    justify-content: center
+    margin-bottom: 5em
 
-.response-item
-    width: 60%
-    height: 10%
-    background-color: purple
+.location-n-time
+    width: 100%
+    margin-left: 3em
+
+.weather-city-name, .city-time
+    color: #988570
 
 .weather-city-name
-    font-weight: 700
+    font-weight: 800
+    font-size: 2em
+    margin-bottom: 0
+    margin-top: .5em
+
+.city-time
+    margin-top: 0
+    font-weight: 600
+    margin-left: 1em
+
+.temp-n-img
+    margin-top: 0
+    width: 100%
+    background-image: url('./assets/cloudy.svg')
+    background-repeat: no-repeat
+    background-size: 450px
+    background-position: center
+    display: flex
+    justify-content: center
+
+.temp
+    font-weight: 900
+    font-size: 7em
+    color: #DEDCDC
+    margin-top: 0
+
+.temp-cf
+    font-weight: 800
+    font-size: 7em
+    color: #dedcdc
+    margin-top: 0
+    margin-left: .1em
+
+.weather-desc
+    font-weight: 600
+    font-size: 1.25em
+    color: #dedcdc
+    text-align: center
+
+.weather-stats-container
+    background-color: #1E1E24
+    display: flex
+    width: 100%
+    height: 6em
+    justify-content: space-between
+    margin-top: 1em
+
+.weather-stat
+    background-color: #24242A
+    width: 32%
+    height: 100%
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    flex-direction: column
+
+.right-stat-box
+    border-radius: 0px 0px 20px 0px
+
+.left-stat-box
+    border-radius: 0px 0px 0px 20px
+
+.stat-text, .stat-text-addon
+    font-weight: 600
+    color: #dedcdc
+    font-size: 1em
+
+.stat-text-container
+    display: flex
+
+.stat-icon
+    width: 1.5em
+
+.stat-text-addon
+    margin-left: .2em
+
+.wind-icon
+    width: 1.2em
