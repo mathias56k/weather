@@ -1,22 +1,66 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Weather.sass';
-import HumidityIcon from './assets/humidity-icon.svg';
-import WindIcon from './assets/wind-icon.svg';
+
+import HumidityIcon from './assets/stat-icons/humidity-icon.svg';
+import WindIcon from './assets/stat-icons/wind-icon.svg';
+
+import Cloudy from './assets/weather-images/cloudy.svg';
+import ClearNight from './assets/weather-images/clear-night.svg';
+import ClearDay from './assets/weather-images/clear-day.svg';
+import PartCloudyDay from './assets/weather-images/part-cloudy-day.svg'
+import PartCloudyNight from './assets/weather-images/part-cloudy-night.svg'
 
 const Weather = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const [currentTime, setCurrentTime] = useState(null);
+  const [weatherIcon, setWeatherIcon] = useState(null);
+
+  const weatherIconSvg = {
+    '01n': {
+      icon: ClearNight,
+      backgroundSize: '225px',
+    },
+    '01d': {
+      icon: ClearDay,
+      backgroundSize: '225px',
+    },
+    '02d': {
+      icon: PartCloudyDay,
+      backgroundSize: '380px',
+    },
+    '02n': {
+      icon: PartCloudyNight,
+      backgroundSize: '380px',
+    },
+    '03d': {
+      icon: Cloudy,
+      backgroundSize: '450px',
+    },
+    '03n': {
+      icon: Cloudy,
+      backgroundSize: '450px',
+    },
+    '04d': {
+      icon: Cloudy,
+      backgroundSize: '450px',
+    },
+    '04n': {
+      icon: Cloudy,
+      backgroundSize: '450px',
+    },
+  };
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=NOAPIFORYOU`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=NOKEYFORYOU`
       );
       setWeatherData(response.data);
       calculateCurrentTime(response.data.timezone);
       console.log(response.data);
+      setWeatherIcon(weatherIconSvg[response.data.weather[0].icon] || null);
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +100,8 @@ const Weather = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchData();
-  };
+};
+
 
   return (
     <div className='weather-container'>
@@ -79,12 +124,15 @@ const Weather = () => {
             <h2 className='weather-city-name response-item'>{(weatherData.name).toUpperCase()}</h2>
             {currentTime && <p className='city-time response-item'>{formatTime(currentTime)}</p>}
           </div>
-          <div className='temp-n-img'>
+          <div className='temp-n-img' style={{ 
+        backgroundImage: `url(${weatherIcon?.icon})`,
+        backgroundSize: weatherIcon?.backgroundSize || 'auto'
+      }}>
             <p className='temp'>{Math.floor(weatherData.main.temp)}</p><p className='temp-cf'>°C</p>
           </div>
           
           <p className='weather-desc'>{(weatherData.weather[0].description).toUpperCase()}</p>
-          
+
           <div className='weather-stats-container'>
             <div className='weather-stat left-stat-box'>
               <img src={HumidityIcon} alt="Humidity Icon" className='stat-icon' />
