@@ -10,6 +10,8 @@ import ClearNight from './assets/weather-images/clear-night.svg';
 import ClearDay from './assets/weather-images/clear-day.svg';
 import PartCloudyDay from './assets/weather-images/part-cloudy-day.svg'
 import PartCloudyNight from './assets/weather-images/part-cloudy-night.svg'
+import Rain from './assets/weather-images/rain.svg'
+import Thunder from './assets/weather-images/thunder.svg'
 
 const Weather = () => {
   const [city, setCity] = useState('');
@@ -50,12 +52,36 @@ const Weather = () => {
       icon: Cloudy,
       backgroundSize: '450px',
     },
+    '09d': {
+      icon: Rain,
+      backgroundSize: '450px',
+    },
+    '09n': {
+      icon: Rain,
+      backgroundSize: '450px',
+    },
+    '10n': {
+      icon: Rain,
+      backgroundSize: '430px',
+    },
+    '10d': {
+      icon: Rain,
+      backgroundSize: '400px',
+    },
+    '11n': {
+      icon: Thunder,
+      backgroundSize: '350px',
+    },
+    '11d': {
+      icon: Thunder,
+      backgroundSize: '400px',
+    },
   };
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=NOKEYFORYOU`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=APIKEY`
       );
       setWeatherData(response.data);
       calculateCurrentTime(response.data.timezone);
@@ -66,12 +92,12 @@ const Weather = () => {
     }
   };
 
-  const calculateCurrentTime = (timezone) => {
-    const offsetInSeconds = timezone; // Timezone offset in seconds (e.g., 10800 for Tallinn)
+  const calculateCurrentTime = (timezone: any) => {
+    const offsetInSeconds = timezone;
   
     const updateTime = () => {
       const localTime = new Date();
-      const localOffsetInMilliseconds = localTime.getTimezoneOffset() * 60 * 1000; // Convert minutes to milliseconds
+      const localOffsetInMilliseconds = localTime.getTimezoneOffset() * 60 * 1000;
       const chosenLocationTime = new Date(localTime.getTime() + (offsetInSeconds * 1000) + localOffsetInMilliseconds);
   
       setCurrentTime(chosenLocationTime);
@@ -149,7 +175,7 @@ const Weather = () => {
             <div className='weather-stat right-stat-box'>
               <img src={HumidityIcon} alt="Humidity Icon" className='stat-icon' />
               <div className='stat-text-container'>
-                <p className='stat-text'>{weatherData.wind.speed}</p><p className='stat-text-addon'>m/s</p>
+                <p className='stat-text'>{formatTime(weatherData.sys.sunset  )}</p><p className='stat-text-addon'></p>
               </div>
             </div>
           </div>
