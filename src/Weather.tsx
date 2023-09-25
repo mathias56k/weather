@@ -4,6 +4,7 @@ import './Weather.sass';
 
 import HumidityIcon from './assets/stat-icons/humidity-icon.svg';
 import WindIcon from './assets/stat-icons/wind-icon.svg';
+import SunsetIcon from './assets/stat-icons/sunset-icon.svg';
 
 import Cloudy from './assets/weather-images/cloudy.svg';
 import ClearNight from './assets/weather-images/clear-night.svg';
@@ -12,6 +13,8 @@ import PartCloudyDay from './assets/weather-images/part-cloudy-day.svg'
 import PartCloudyNight from './assets/weather-images/part-cloudy-night.svg'
 import Rain from './assets/weather-images/rain.svg'
 import Thunder from './assets/weather-images/thunder.svg'
+import Snow from './assets/weather-images/snow.svg'
+import Fog from './assets/weather-images/fog.svg'
 
 const Weather = () => {
   const [city, setCity] = useState('');
@@ -76,16 +79,31 @@ const Weather = () => {
       icon: Thunder,
       backgroundSize: '400px',
     },
+    '13d': {
+      icon: Snow,
+      backgroundSize: '245px',
+    },
+    '13n': {
+      icon: Snow,
+      backgroundSize: '245px',
+    },
+    '50d': {
+      icon: Fog,
+      backgroundSize: '350px',
+    },
+    '50n': {
+      icon: Fog,
+      backgroundSize: '350px',
+    },
   };
-
+  
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=APIKEY`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=6c938d5b685b87e4798fbf1191cb5816`
       );
       setWeatherData(response.data);
       calculateCurrentTime(response.data.timezone);
-      console.log(response.data);
       setWeatherIcon(weatherIconSvg[response.data.weather[0].icon] || null);
     } catch (error) {
       console.error(error);
@@ -110,20 +128,26 @@ const Weather = () => {
     return () => clearInterval(intervalId);
   };
 
-  const formatTime = (time) => {
+  const formatTime = (time : any) => {
     const options = { hour: 'numeric', minute: '2-digit', hour12: true };
     return new Intl.DateTimeFormat('en-US', options).format(time);
   };
+
+  const formatSunsetTime = (time) => {
+    let timeToMilliseconds = time * 1000;
+    const options = { hour: 'numeric', minute: '2-digit', hour12: true };
+    return new Intl.DateTimeFormat('en-US', options).format(timeToMilliseconds);
+  }
   
   useEffect(() => {
     fetchData();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e : any) => {
     setCity(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e : any) => {
     e.preventDefault();
     fetchData();
 };
@@ -167,15 +191,15 @@ const Weather = () => {
               </div>
             </div>
             <div className='weather-stat'>
-              <img src={WindIcon} alt="Humidity Icon" className='stat-icon wind-icon' style={{transform: `rotate(${weatherData.wind.deg}deg)`}} />
+              <img src={WindIcon} alt="Wind Icon" className='stat-icon wind-icon' style={{transform: `rotate(${weatherData.wind.deg}deg)`}} />
               <div className='stat-text-container'>
                 <p className='stat-text'>{weatherData.wind.speed}</p><p className='stat-text-addon'>m/s</p>
               </div>
             </div>
             <div className='weather-stat right-stat-box'>
-              <img src={HumidityIcon} alt="Humidity Icon" className='stat-icon' />
+              <img src={SunsetIcon} alt="Sunset Icon" className='stat-icon sunset-icon' />
               <div className='stat-text-container'>
-                <p className='stat-text'>{formatTime(weatherData.sys.sunset  )}</p><p className='stat-text-addon'></p>
+                <p className='stat-text'>{formatSunsetTime(weatherData.sys.sunset)}</p><p className='stat-text-addon'></p>
               </div>
             </div>
           </div>
