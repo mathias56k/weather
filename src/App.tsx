@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import 'react'
 import './App.sass'
-import Weather from './weather'
+import Weather from './Weather'
 import Forecast from './Forecast'
 
 function App() {

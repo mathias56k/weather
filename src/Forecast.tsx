@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Forecast.sass';
 
 import config from './config';
 
 const Forecast = () => {
+
+    // @ts-ignore
     const [weatherData, setWeatherData] = useState(null);
 
     const fetchData = async () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Weather.sass';
 
@@ -22,11 +22,11 @@ import config from './config.ts';
 
 const Weather = () => {
   const [city, setCity] = useState('');
-  const [weatherData, setWeatherData] = useState(null);
-  const [currentTime, setCurrentTime] = useState(null);
-  const [weatherIcon, setWeatherIcon] = useState(null);
+  const [weatherData, setWeatherData] : any = useState(null);
+  const [currentTime, setCurrentTime] : any = useState(null);
+  const [weatherIcon, setWeatherIcon] : any = useState(null);
 
-  const weatherIconSvg = {
+  const weatherIconSvg : any = {
     '01n': {
       icon: ClearNight,
       backgroundSize: '225px',
@@ -133,16 +133,19 @@ const Weather = () => {
     return () => clearInterval(intervalId);
   };
 
-  const formatTime = (time : any) => {
-    const options = { hour: 'numeric', minute: '2-digit', hour12: true };
+  const formatTime = (time: Date): string => {
+    const options: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
     return new Intl.DateTimeFormat('en-US', options).format(time);
-  };
+  };  
 
-  const formatSunsetTime = (time) => {
-    let timeToMilliseconds = time * 1000;
-    const options = { hour: 'numeric', minute: '2-digit', hour12: true };
-    return new Intl.DateTimeFormat('en-US', options).format(timeToMilliseconds);
-  }
+  const formatSunsetTime = (time: number) => {
+    const timeInMilliseconds = time * 1000; // Convert seconds to milliseconds
+    const date = new Date(timeInMilliseconds); // Create a Date object
+  
+    const options: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
+    return new Intl.DateTimeFormat('en-US', options).format(date);
+  };
+  
   
   useEffect(() => {
     fetchData();
