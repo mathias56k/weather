@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Weather.sass';
 
+import SearchButtonIcon from './assets/search-button-icon.svg'
+
 import HumidityIcon from './assets/stat-icons/humidity-icon.svg';
 import WindIcon from './assets/stat-icons/wind-icon.svg';
 import SunsetIcon from './assets/stat-icons/sunset-icon.svg';
@@ -15,6 +17,8 @@ import Rain from './assets/weather-images/rain.svg'
 import Thunder from './assets/weather-images/thunder.svg'
 import Snow from './assets/weather-images/snow.svg'
 import Fog from './assets/weather-images/fog.svg'
+
+import config from './config.ts'; 
 
 const Weather = () => {
   const [city, setCity] = useState('');
@@ -99,8 +103,9 @@ const Weather = () => {
   
   const fetchData = async () => {
     try {
+      const apiKey = config.REACT_APP_API_KEY;
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=6c938d5b685b87e4798fbf1191cb5816`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
       );
       setWeatherData(response.data);
       calculateCurrentTime(response.data.timezone);
@@ -164,7 +169,7 @@ const Weather = () => {
             onChange={handleInputChange}
             className='searchbox'
           />
-          <button type="submit" className='searchbutton'></button>
+          <button type="submit" className='searchbutton'><img className='search-btn-icon' src={SearchButtonIcon} alt="Search Button Icon" /></button>
         </form>
       </div>
 
@@ -207,7 +212,7 @@ const Weather = () => {
           
         </div>
       ) : (
-        <p>Loading weather data...</p>
+        <p className='weather-placeholder'>SEARCH FOR A CITY</p>
       )}
     </div>
   );

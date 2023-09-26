@@ -28,14 +28,31 @@
     border-radius: 15px
     background: none
     border: solid 4px #988570
+    color: #988570
+    font-weight: 700
+    font-size: 1.5em
+    padding-left: .3em
+    margin-left: .1em
+
+.searchbox:focus
+    outline: none
+
+::placeholder
+    color: #988570
 
 .searchbutton
-    height: 3.5em
-    width: 3.5em
-    margin-left: .4em
+    height: 4.5em
+    width: 4.5em
+    margin-left: 1em
     border-radius: 15px
     background-color: #988570
     border: solid 4px #988570
+    display: flex
+    align-items: center
+    justify-content: center
+
+.search-btn-icon
+    width: 2em
 
 .weather-response-container
     background-color: #24242A
@@ -135,3 +152,8 @@
 .sunset-icon
     width: 2.25em
     margin-bottom: .15em
+
+.weather-placeholder
+    color: #dedcdc
+    font-weight: 800
+    font-size: 2em
