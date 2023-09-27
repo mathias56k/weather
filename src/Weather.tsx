@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Weather.sass';
+import Forecast from './Forecast.tsx';
 
 import SearchButtonIcon from './assets/search-button-icon.svg'
 
@@ -211,8 +212,7 @@ const Weather = () => {
               </div>
             </div>
           </div>
-
-          
+          <Forecast city={city} />
         </div>
       ) : (
         <p className='weather-placeholder'>SEARCH FOR A CITY</p>

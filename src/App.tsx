@@ -1,7 +1,6 @@
 import 'react'
 import './App.sass'
 import Weather from './Weather'
-import Forecast from './Forecast'
 import {Helmet} from 'react-helmet'
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
         <link rel="Page Icon" href="assets/page-icon.png" />
       </Helmet>
       <Weather />
-      <Forecast />
     </>
   )
 }
