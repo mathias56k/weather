@@ -127,10 +127,8 @@ const Weather = () => {
       setCurrentTime(chosenLocationTime);
     };
   
-    // Update the time every second
     const intervalId = setInterval(updateTime, 1000);
   
-    // Clear the interval when the component is unmounted
     return () => clearInterval(intervalId);
   };
 
@@ -140,8 +138,8 @@ const Weather = () => {
   };  
 
   const formatSunsetTime = (time: number) => {
-    const timeInMilliseconds = time * 1000; // Convert seconds to milliseconds
-    const date = new Date(timeInMilliseconds); // Create a Date object
+    const timeInMilliseconds = time * 1000;
+    const date = new Date(timeInMilliseconds);
   
     const options: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
     return new Intl.DateTimeFormat('en-US', options).format(date);
@@ -212,7 +210,9 @@ const Weather = () => {
               </div>
             </div>
           </div>
-          <Forecast city={city} />
+          <div className='forecast-container'>
+            <Forecast city={city} className="asd" />
+          </div>
         </div>
       ) : (
         <p className='weather-placeholder'>SEARCH FOR A CITY</p>
