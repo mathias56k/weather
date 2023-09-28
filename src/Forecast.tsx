@@ -3,8 +3,11 @@ import axios from 'axios';
 import './Forecast.sass';
 import config from './config';
 
+import clearsky from './assets/04d.svg'
+
 const Forecast = ({ city }: any) => {
   const [forecastData, setForecastData] = useState(null);
+  const [weatherIcon, setWeatherIcon] : any = useState(null);
 
   const fetchData = async () => {
     try {
@@ -38,7 +41,7 @@ const Forecast = ({ city }: any) => {
         groupedForecastData[day].push({
           hour: date.toLocaleTimeString('en-US', { hour: 'numeric' }),
           temp: Math.floor(item.main.temp),
-          weatherIcon: item.weather[0].icon,
+          weatherIcon: (item.weather[0].main).toUpperCase(),
           dayNumber,
         });
       });
