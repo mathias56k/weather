@@ -1,3 +1,8 @@
+$pageBgColor: #1E1E24
+$secondaryColor: #988570    // Color for searchbox border, searchbox button and place / time text
+$thirdColor: #24242A    // Weather response background color
+$textColor: #DEDCDC
+    
 *
     font-family: Montserrat
 
@@ -6,7 +11,7 @@
     display: flex
     flex-direction: column
     align-items: center
-    background-color: #1E1E24
+    background-color: $pageBgColor
 
 .topbar
     height: 5em
@@ -27,8 +32,8 @@
     width: 70%
     border-radius: 15px
     background: none
-    border: solid 4px #988570
-    color: #988570
+    border: solid 4px $secondaryColor
+    color: $secondaryColor
     font-weight: 700
     font-size: 1.5em
     padding-left: .3em
@@ -45,8 +50,8 @@
     width: 4.5em
     margin-left: 1em
     border-radius: 15px
-    background-color: #988570
-    border: solid 4px #988570
+    background-color: $secondaryColor
+    border: solid 4px $secondaryColor
     display: flex
     align-items: center
     justify-content: center
@@ -55,7 +60,7 @@
     width: 2em
 
 .weather-response-container
-    background-color: #24242A
+    background-color: $thirdColor
     border-radius: 20px
     width: 85%
     height: 100%
@@ -69,7 +74,7 @@
     margin-left: 3em
 
 .weather-city-name, .city-time
-    color: #988570
+    color: $secondaryColor
 
 .weather-city-name
     font-weight: 800
@@ -93,24 +98,24 @@
 .temp
     font-weight: 900
     font-size: 7em
-    color: #DEDCDC
+    color: $textColor
     margin-top: 0
 
 .temp-cf
     font-weight: 800
     font-size: 7em
-    color: #dedcdc
+    color: $textColor
     margin-top: 0
     margin-left: .1em
 
 .weather-desc
     font-weight: 600
     font-size: 1.25em
-    color: #dedcdc
+    color: $textColor
     text-align: center
 
 .weather-stats-container
-    background-color: #1E1E24
+    background-color: $pageBgColor
     display: flex
     width: 100%
     height: 6em
@@ -118,7 +123,7 @@
     margin-top: 1em
 
 .weather-stat
-    background-color: #24242A
+    background-color: $thirdColor
     width: 32%
     height: 100%
     display: flex
@@ -134,7 +139,7 @@
 
 .stat-text, .stat-text-addon
     font-weight: 600
-    color: #dedcdc
+    color: $textColor
     font-size: 1em
 
 .stat-text-container
@@ -154,10 +159,10 @@
     margin-bottom: .15em
 
 .weather-placeholder
-    color: #dedcdc
+    color: $textColor
     font-weight: 800
     font-size: 2em
 
 .forecast-container
     width: 100%
-    background-color: #1E1E24
+    background-color: $pageBgColor
