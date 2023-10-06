@@ -1,5 +1,9 @@
+$backgroundColor: #24242A
+$secondColor: #9C8A7648
+$textColor: #DEDCDC
+    
 .forecast-day-container
-    background-color: #24242A
+    background-color: $backgroundColor
     margin-top: 2em
     padding: 0
     height: 10em
@@ -15,7 +19,7 @@
     align-items: center
 
 .forecast-day-number, .forecast-day-text
-    color: #dedcdc
+    color: $textColor
 
 .forecast-day-number
     margin-left: .5em
@@ -38,7 +42,7 @@
     flex-direction: column
     justify-content: center
     align-items: center
-    background-color: #9c8a7648
+    background-color: $secondColor
     margin-left: .7em
     height: 5em
     width: 100%
@@ -65,4 +69,4 @@
     display: flex
     justify-content: center
     align-items: center
-    color: #dedcdc
+    color: $textColor
